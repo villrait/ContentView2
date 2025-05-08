@@ -10,6 +10,7 @@ struct NavigationConfigurator {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.white.withAlphaComponent(0.50)
+        appearance.backgroundEffect = UIBlurEffect(style: .regular)
         
         navController.navigationBar.standardAppearance = appearance
         navController.navigationBar.scrollEdgeAppearance = appearance

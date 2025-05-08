@@ -8,7 +8,7 @@ struct TabBarConfigurator {
         
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.white.withAlphaComponent(0.25)
-        appearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+        appearance.backgroundEffect = UIBlurEffect(style: .regular)
         
         let itemAppearance = UITabBarItemAppearance()
         
@@ -22,3 +22,4 @@ struct TabBarConfigurator {
         
     }
 }
+

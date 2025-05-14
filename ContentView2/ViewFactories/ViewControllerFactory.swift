@@ -2,32 +2,32 @@ import UIKit
 
 class ViewControllerFactory {
     static func createViewControllers() -> [UIViewController] {
+        let homeVC = HomeViewController()
+        let favoritesVC = FavoritesViewController()
         let cartVC = CartViewController()
-        let heartVC = HeartViewController()
-        let creditCardVC = CreditcardViewController()
 
-        cartVC.tabBarItem = UITabBarItem(
-            title: "Cart",
-            image: UIImage(systemName: "cart"),
-            selectedImage: UIImage(systemName: "cart.fill")
+        homeVC.tabBarItem = UITabBarItem(
+            title: "Главная",
+            image: UIImage(systemName: "house"),
+            selectedImage: UIImage(systemName: "house.fill")
         )
         
-        heartVC.tabBarItem = UITabBarItem(
-            title: "Favorites",
+        favoritesVC.tabBarItem = UITabBarItem(
+            title: "Избранное",
             image: UIImage(systemName: "heart"),
             selectedImage: UIImage(systemName: "heart.fill")
         )
         
-        creditCardVC.tabBarItem = UITabBarItem(
-            title: "Payments",
-            image: UIImage(systemName: "creditcard"),
-            selectedImage: UIImage(systemName: "creditcard.fill")
+        cartVC.tabBarItem = UITabBarItem(
+            title: "Корзина",
+            image: UIImage(systemName: "cart"),
+            selectedImage: UIImage(systemName: "cart.fill")
         )
         
         return [
-            NavigationConfigurator.createNavigationController(for: cartVC),
-            NavigationConfigurator.createNavigationController(for: heartVC),
-            NavigationConfigurator.createNavigationController(for: creditCardVC)
+            NavigationConfigurator.createNavigationController(for: homeVC),
+            NavigationConfigurator.createNavigationController(for: favoritesVC),
+            NavigationConfigurator.createNavigationController(for: cartVC)
         ]
     }
 }

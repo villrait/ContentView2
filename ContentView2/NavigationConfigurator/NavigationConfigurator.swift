@@ -15,9 +15,9 @@ struct NavigationConfigurator {
         navController.navigationBar.standardAppearance = appearance
         navController.navigationBar.scrollEdgeAppearance = appearance
         
-        if rootVC is CartViewController ||
-            rootVC is HeartViewController ||
-            rootVC is CreditcardViewController {
+        if rootVC is HomeViewController ||
+            rootVC is FavoritesViewController ||
+            rootVC is CartViewController {
             rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(
                 image: UIImage(systemName: "gearshape"),
                 style: .plain,

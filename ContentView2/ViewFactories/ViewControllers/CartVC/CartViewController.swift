@@ -1,6 +1,6 @@
 import UIKit
 
-class CreditcardViewController: UIViewController {
+class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Корзина"

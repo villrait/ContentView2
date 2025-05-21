@@ -2,7 +2,7 @@ import UIKit
 
 struct TabBarConfigurator {
     static func configure(_ tabBarController: UITabBarController) {
-        tabBarController.viewControllers = ViewControllerFactory.createViewControllers()
+        tabBarController.viewControllers = MainTabControllersFactory.makeTabControllers()
         
         let appearance = UITabBarAppearance()
         

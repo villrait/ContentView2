@@ -1,7 +1,7 @@
 import UIKit
 
-class ViewControllerFactory {
-    static func createViewControllers() -> [UIViewController] {
+class MainTabControllersFactory { // по названию не понятно, что делает. Надо переделать в более точное название (маинСкринТабКонтроллерсФАктории)
+    static func makeTabControllers() -> [UIViewController] { // createViewControllers так же над названием поработать надо
         let homeVC = HomeViewController()
         let favoritesVC = FavoritesViewController()
         let cartVC = CartViewController()

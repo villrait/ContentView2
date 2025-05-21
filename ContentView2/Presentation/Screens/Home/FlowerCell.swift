@@ -4,6 +4,8 @@ class FlowerCell: UICollectionViewCell {
     
     static let identifier = "FlowerCell"
  
+    weak var delegate: FlowerCellDelegate?
+    
     private let flowerCellImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
@@ -33,8 +35,9 @@ class FlowerCell: UICollectionViewCell {
     }(UILabel())
     
     
-    private let flowerCellButton: UIButton = {
+    private let flowerCellButton: UIButton = { 
         $0.translatesAutoresizingMaskIntoConstraints = false
+        //$0.addTarget(self, action: #selector(openDetails), for: .touchUpInside)
         $0.setTitle("В корзину", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .systemBlue
@@ -59,6 +62,7 @@ class FlowerCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
+        setupTapped()
     }
     
     required init?(coder: NSCoder) {
@@ -66,7 +70,7 @@ class FlowerCell: UICollectionViewCell {
     }
     
     func setupCell(flower: Flower) {
-        flowerCellImage.image = flower.image
+        flowerCellImage.image = UIImage(named: flower.imageName)
         flowerCellText.text = flower.name
         flowerCellPrice.text = String(format: "%.0f ₽", flower.price)
     }
@@ -100,93 +104,23 @@ class FlowerCell: UICollectionViewCell {
             
         ])
     }
+    
+    private func setupTapped() {
+        flowerCellButton.removeTarget(self, action: #selector(tapToBy), for: .touchUpInside) // нужна на время, чтобы кнопка не реагировала ни на что
+        addTapGesture()
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openDetails))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func openDetails() {
+        delegate?.openDetails(for: self)
+    }
+    
+    @objc private func tapToBy() {
+        
+    }
 }
-    
-    
-    
-    
-//    private var flowerCellStackView: UIStackView = {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.backgroundColor = .systemMint
-//        $0.layer.cornerRadius = 20
-//        $0.clipsToBounds = true
-//        $0.axis = .vertical
-//        $0.distribution = .fill
-//        $0.alignment = .fill
-//        $0.spacing = 10
-//        return $0
-//    }(UIStackView())
-//    
-//    private var flowerCellImage: UIImageView = {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.layer.cornerRadius = 20
-//        $0.contentMode = .scaleAspectFill
-//        $0.clipsToBounds = true
-//        $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-//        return $0
-//    }(UIImageView())
-//    
-//    private var flowerCellText: UILabel = {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.numberOfLines = 0
-//        $0.setContentHuggingPriority(.required, for: .vertical)
-//        $0.font = .systemFont(ofSize: 14, weight: .medium)
-//        return $0
-//    }(UILabel())
-//    
-//    private var flowerCellPrice: UILabel = {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.numberOfLines = 0
-//        $0.setContentHuggingPriority(.required, for: .vertical)
-//        $0.font = .systemFont(ofSize: 16, weight: .bold)
-//        return $0
-//    }(UILabel())
-//    
-//    private var flowerCellButton: UIButton = {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
-//        $0.backgroundColor = .systemBlue
-//        $0.layer.cornerRadius = 20
-//        $0.setTitle("В корзину", for: .normal)
-//        $0.setTitleColor(.white, for: .normal)
-//        $0.setContentHuggingPriority(.required, for: .vertical)
-//        return $0
-//    }(UIButton())
-//    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-//        contentView.addSubview(flowerCellStackView)
-//        flowerCellStackView.addArrangedSubview(flowerCellImage)
-//        flowerCellStackView.addArrangedSubview(flowerCellText)
-//        flowerCellStackView.addArrangedSubview(flowerCellPrice)
-//        flowerCellStackView.addArrangedSubview(flowerCellButton)
-//        
-//        setupConstraints()
-//        
-//        contentView.backgroundColor = .systemRed
-//        contentView.layer.cornerRadius = 20
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    func setupCell(flower: Flower) {
-//        flowerCellImage.image = flower.image
-//        flowerCellText.text = flower.name
-//        flowerCellPrice.text = String(format: "%.0f ₽", flower.price)
-//    }
-//    
-//    private func setupConstraints() {
-//        
-//        NSLayoutConstraint.activate([
-//            flowerCellStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-//            flowerCellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-//            flowerCellStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-//            flowerCellStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-//        ])
-//        contentView.clipsToBounds = true
-//    }
-//}
+
